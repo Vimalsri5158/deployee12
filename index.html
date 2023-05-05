@@ -1,37 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Countries Data</title>
-    <style>
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-
-      th, td {
-        text-align: left;
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-      }
-
-      th {
-        background-color: #f2f2f2;
-      }
-    </style>
+    <title>Country Flags</title>
   </head>
   <body>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Region</th>
-          <th>Sub-region</th>
-          <th>Population</th>
-        </tr>
-      </thead>
-      <tbody id="countries-data">
-      </tbody>
-    </table>
-    <script src="script.js"></script>
+    <div id="flags-container"></div>
+    <script>
+      fetch('https://restcountries.com/v3.1/all')
+        
+        .then(response => response.json())
+        .then(data => {
+          const flagsContainer = document.getElementById('flags-container');
+          data.forEach(country => {
+            const flagUrl = country.flags.svg;
+            const flagImg = document.createElement('img');
+            flagImg.src = flagUrl;
+            flagsContainer.appendChild(flagImg);
+          });
+        })
+        
+    </script>
   </body>
 </html>
